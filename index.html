@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+	<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'>
+		<style> .cs { stroke: rgb(0, 0, 0); stroke-width: 1; } </style>
+		<style> .bl { fill: rgb(255, 255, 255); } </style>
+		<style> .ng { fill: rgb(0, 0, 0); } </style>
+		<circle cx='30' cy='30' r='30' class='cs ng'/>
+		<circle cx='30' cy='30' r='10' class='cs bl'/>
+		<circle cx='10' cy='30' r='10' class='cs bl'/>
+		<circle cx='50' cy='30' r='10' class='cs bl'/>
+		<circle cx='40' cy='12.67' r='10' class='cs bl'/>
+		<circle cx='20' cy='12.67' r='10' class='cs bl'/>
+		<circle cx='40' cy='47.32' r='10' class='cs bl'/>
+		<circle cx='20' cy='47.32' r='10' class='cs bl'/> 
+	</svg>"/>
+	<title>𝓥𝓲𝓭𝓮𝓸 𝓪 𝓟𝓓𝓕</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			text-align: center;
+			font-family: sans-serif;
+		}
+		body {
+			--vw: 1vw;
+			--vh: 1vh;
+			width: 100vw;
+			width: calc(100 * var(--vw));
+			height: 100vh;
+			height: calc(100 * var(--vh));
+			cursor: move;
+			background-color: rgb(90, 91, 96);
+		}
+		main {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			position: relative;
+		}
+		#contenedorQ5 {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			z-index: 2;
+		}
+		#contenedorQ5 canvas {
+			touch-action: none;
+			position: absolute;
+			top: 0;
+		}
+		#contenedorQ5 video {
+			display: none !important;
+		}
+		#contenedorInput {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			z-index: 3;
+			pointer-events: none;
+		}
+		#contenedorInput input, #contenedorInput button {
+			margin: 0.1rem;
+			padding: 1rem;
+			pointer-events: auto;
+			box-shadow: 0 0 10px 6px rgba(255, 255, 255, 0.182);
+		}
+		#contenedorInput input {
+			background-color: rgb(255, 255, 255);
+			cursor: cell;
+		}
+		#contenedorInput button {
+			background-color: rgb(176, 176, 176);
+			cursor: pointer;
+		}
+		#contenedorInput div {
+			text-shadow: 0 0 6px rgba(255, 255, 255, 0.95);
+			position: absolute;
+			bottom: 1rem;
+			pointer-events: auto;
+			cursor: help;
+		}
+		#contenedorInput div a {
+			cursor: pointer;
+		}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<script src="https://q5js.org/q5.min.js"></script>
+</head>
+<body>
+	<main>
+		<div id="contenedorQ5"></div>
+		<div id="contenedorInput">
+			<form>
+
+				<!-- ARCHIVO -->
+				<video id="hiddenVideo" style="display: none"></video>
+				<label for="inputFile">Selecciona un video</label>
+				<input
+					id="inputFile"
+					type="file"
+					accept="video/mp4,video/webm,video/ogg,video/quicktime"
+					required
+				>
+				<br><br>
+
+				<!-- POR HOJA -->
+				<label style="display: none" for="framesPerSheet">Frames por hoja</label>
+				<select style="display: none" id="framesPerSheet" name="framesPerSheet" required>
+					<option value="">-- seleccionar --</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="6">6</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="12">12</option>
+				</select>
+				<br><br>
+
+				<!-- POR SEGUNDO -->
+				<label style="display: none" for="fps">Frames por segundo (FPS)</label>
+				<select style="display: none" id="fps" name="fps" required>
+					<option value="">-- seleccionar --</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="10">10</option>
+					<option value="12">12</option>
+					<option value="15">15</option>
+					<option value="24">24</option>
+					<option value="30">30</option>
+					<option value="60">60</option>
+				</select>
+				<br><br>
+
+				<!-- CARGAR -->
+				<button type="submit" id="inputBtn">CARGAR</button>
+			</form>
+			<div>
+				𝓹𝓸𝓻 𝓗𝓪𝓬𝓱𝓮 𝓣𝓮𝓶𝓮𝓵𝓮<br>
+				una interfaz amigable para: PV1
+			</div>
+		</div>
+	</main>
+	<script type="module">
+	
+	import processFrames from "./processFrames.js";
+	const { jsPDF } = window.jspdf;
+
+	// dom
+	const inputFile = document.querySelector("#inputFile");
+	const inputBtn = document.querySelector("#inputBtn");
+	const video = document.getElementById("hiddenVideo");
+
+	const RESOLU = 400;
+
+  window.setup = () => {
+    createCanvas(10, 10);
+		pixelDensity(1);
+		handleResize();
+		displayMode(MAXED);
+		mouseX = Infinity;
+		background(255);
+
+		const buffer = createGraphics(1240, 1754);
+		buffer.background(255);
+
+		const fiducialMarkers = createGraphics(1240, 1754);
+		fiducialMarkers.fill(255, 0, 0);
+		fiducialMarkers.circle(96, 96, 50);
+		fiducialMarkers.fill(255, 0, 255);
+		fiducialMarkers.circle(1144, 1658, 50);
+		
+		inputBtn.addEventListener("click", e => {
+			e.preventDefault();
+
+			const file = inputFile.files[0];
+			if (!file) return;
+
+			// ocultar inputs
+			const doc = new jsPDF({ orientation: "p", unit: "mm", format: "a4" });
+			const url = URL.createObjectURL(file);
+			video.src = url;
+
+			const coordenadas = new Uint16Array(6);
+			coordenadas[0] = 90;
+			coordenadas[1] = 190;
+			coordenadas[2] = 290;
+			coordenadas[3] = 390;
+			coordenadas[4] = 490;
+			coordenadas[5] = 590;
+
+			const layoutSize = {
+				0: coordenadas,
+				1: coordenadas.map(c => c + 20),
+				2: coordenadas.map(c => c + 120),
+				3: coordenadas.map(c => c + 330),
+			}
+
+			const config = {
+				framesPerSecond: 6,
+				framesPerPage: 4,
+				layoutSize,
+				fiducialMarkers,
+				pageWidth: doc.internal.pageSize.getWidth(),
+				pageHeight: doc.internal.pageSize.getHeight(),
+			}
+
+			video.addEventListener("loadedmetadata", async () => {
+				await processFrames(doc, buffer, config, video);
+				URL.revokeObjectURL(file);
+			}, { once: true });
+		});
+  }
+
+  window.draw = () => {
+		const mod255 = frameCount % 255;
+		background(mod255, 100, 400 - mod255, 10);
+		fill(255, 5);
+		circle(0, 0, mod255);
+		circle(0, height, mod255);
+		circle(width, height, mod255);
+		circle(width, 0, mod255);
+		fill(255, 15);
+		circle(mouseX, mouseY, 255 - mod255);
+	}
+
+	function handleResize() {
+		requestAnimationFrame(() => {
+			const vpw = window.visualViewport?.width ?? window.innerWidth;
+			const vph = window.visualViewport?.height ?? window.innerHeight;
+			const prp = vpw / vph;
+			const isVert = prp < 1;
+			const maxSize = isVert
+				? RESOLU * vph / vpw
+				: RESOLU * prp;
+
+			// cambiar body
+
+			isVert
+				? resizeCanvas(RESOLU, maxSize)
+				: resizeCanvas(maxSize, RESOLU);
+				
+			background(255);
+		});
+	}
+
+	(window.visualViewport ?? window).addEventListener("resize", handleResize);
+
+	</script>
+</body>
+</html>
