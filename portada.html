@@ -266,7 +266,7 @@
 <main>
 	<h1>🅥🅘🅓🅔🅞 🅐 🅟🅓🅕</h1>
 	<ol>
-		<li id="item1">𝟙. 𝕤𝕖𝕝𝕖𝕔𝕔𝕚𝕠𝕟𝕒 𝕦𝕟 𝕧𝕚𝕕𝕖𝕠 𝕥𝕦𝕪𝕠</li>
+		<li id="item1">𝟙. 𝕤𝕖𝕝𝕖𝕔𝕔𝕚𝕠𝕟𝕒 𝕥𝕦 𝕧𝕚𝕕𝕖𝕠 𝕞𝕡𝟜, 𝕞𝕠𝕧, 𝕠𝕘𝕘</li>
 		<li id="item2">𝟚. 𝕕𝕖𝕤𝕔𝕒𝕣𝕘𝕒 𝕦𝕟 𝕡𝕕𝕗 𝕔𝕠𝕟 𝕝𝕠𝕤 𝕗𝕠𝕥𝕠𝕘𝕣𝕒𝕞𝕒𝕤</li>
 		<li id="item3">𝟛. 𝕚𝕞𝕡𝕣𝕚𝕞𝕖 𝕖𝕝 𝕡𝕕𝕗 𝕖𝕟 𝕓𝕝𝕒𝕟𝕔𝕠 𝕪 𝕟𝕖𝕘𝕣𝕠</li>
 		<li id="item4">𝟜. 𝕡𝕚𝕟𝕥𝕒 𝕔𝕒𝕕𝕒 𝕗𝕠𝕥𝕠𝕘𝕣𝕒𝕞𝕒 𝕒 𝕞𝕒𝕟𝕠</li>
@@ -367,42 +367,42 @@ class Particle {
   
   update(q, localTime){
 
-	// global
-	const pNoiseX = localTime;
-	const pNoiseY = localTime * 0.5;
-	const pNoiseZ = localTime * 0.013;
-	const pNoise = q.noise(pNoiseX, pNoiseY, pNoiseZ);
-	const d = pNoise - 0.5;
-	const factor = Math.sign(d) * (d * d) * 0.01;
-	params.noiseAngle += factor;
-	params.noiseScale -= 0.00000001;
-	
-	// local
-	const n = params.noiseAngle * q.noise(params.noiseScale * this.x, params.noiseScale * this.y, pNoise);
-	this.vx = params.noiseSpeed * q.cos(n);
-	this.vy = params.noiseSpeed * q.sin(n);
-	this.x += this.vx;
-	this.y += this.vy;
-	this.alpha += 0.01;
+		// global
+		const pNoiseX = localTime;
+		const pNoiseY = localTime * 0.5;
+		const pNoiseZ = localTime * 0.013;
+		const pNoise = q.noise(pNoiseX, pNoiseY, pNoiseZ);
+		const d = pNoise - 0.5;
+		const factor = Math.sign(d) * (d * d) * 0.01;
+		params.noiseAngle += factor;
+		params.noiseScale -= 0.00000001;
 
-	// colision
-	if (
-		this.x < 0 ||
-		this.x > q.width ||
-		this.y < 0 ||
-		this.y > q.height
-	){
-	  const newX = q.random(0, q.width);
-	  const newY = q.random(0, q.height);
-	  this.x = newX;
-	  this.y = newY;
-	  this.alpha = 0;
+		// local
+    const n = params.noiseAngle * q.noise(params.noiseScale * this.x, params.noiseScale * this.y, pNoise);
+		this.vx = params.noiseSpeed * q.cos(n);
+    this.vy = params.noiseSpeed * q.sin(n);
+		this.x += this.vx;
+		this.y += this.vy;
+    this.alpha += 0.01;
+    
+		// colision
+    if (
+			this.x < 0 ||
+			this.x > q.width ||
+			this.y < 0 ||
+			this.y > q.height
+		){
+      const newX = q.random(0, q.width);
+      const newY = q.random(0, q.height);
+      this.x = newX;
+      this.y = newY;
+      this.alpha = 0;
+    }
 	}
-}
 
-render(q, hueValue) {
-	q.stroke(hueValue, 100, 100, this.alpha);
-    q.point(this.x,this.y);
+	render(instance, hueValue) {
+		instance.stroke(hueValue, 100, 100, this.alpha);
+    instance.point(this.x,this.y);
   }
 }
 
