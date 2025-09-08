@@ -86,6 +86,8 @@
 	}
 
 	main canvas {
+		user-select: none;
+		-webkit-user-select: none;
 		box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2);
 		animation: rotateCanvas 15s linear infinite;
 	}
@@ -201,9 +203,11 @@
 		height: 40vh;
 		height: 40svh;
 		position: fixed;
+		top: 60vh;
 		display: flex;
 		justify-content: center;
-		top: 60vh;
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	#fixedArea video {
@@ -217,9 +221,9 @@
 	}
 
 	@keyframes scaleClick {
-		0% { transform: scale(1.2) translateY(-4vh) }
+		0% { transform: scale(1.2) translateY(-2.4vh) }
 		50% { transform: scale(0.6) translateY(4vh) }
-		100% { transform: scale(1.2) translateY(-4vh) }
+		100% { transform: scale(1.2) translateY(-2.4vh) }
 	}
 
 	#fixedArea label {
@@ -227,6 +231,8 @@
 		position: absolute;
 		bottom: max(90px, 22%);
 		background-color: rgb(176, 176, 176);
+		user-select: auto;
+		-webkit-user-select: auto;
 		cursor: pointer;
 		border: 1.7px outset black;
 		border-image: none 100% / 1 / 0 stretch;
@@ -361,42 +367,42 @@ class Particle {
   
   update(q, localTime){
 
-		// global
-		const pNoiseX = localTime;
-		const pNoiseY = localTime * 0.5;
-		const pNoiseZ = localTime * 0.013;
-		const pNoise = q.noise(pNoiseX, pNoiseY, pNoiseZ);
-		const d = pNoise - 0.5;
-		const factor = Math.sign(d) * (d * d) * 0.01;
-		params.noiseAngle += factor;
-		params.noiseScale -= 0.00000001;
+	// global
+	const pNoiseX = localTime;
+	const pNoiseY = localTime * 0.5;
+	const pNoiseZ = localTime * 0.013;
+	const pNoise = q.noise(pNoiseX, pNoiseY, pNoiseZ);
+	const d = pNoise - 0.5;
+	const factor = Math.sign(d) * (d * d) * 0.01;
+	params.noiseAngle += factor;
+	params.noiseScale -= 0.00000001;
+	
+	// local
+	const n = params.noiseAngle * q.noise(params.noiseScale * this.x, params.noiseScale * this.y, pNoise);
+	this.vx = params.noiseSpeed * q.cos(n);
+	this.vy = params.noiseSpeed * q.sin(n);
+	this.x += this.vx;
+	this.y += this.vy;
+	this.alpha += 0.01;
 
-		// local
-    const n = params.noiseAngle * q.noise(params.noiseScale * this.x, params.noiseScale * this.y, pNoise);
-		this.vx = params.noiseSpeed * q.cos(n);
-    this.vy = params.noiseSpeed * q.sin(n);
-		this.x += this.vx;
-		this.y += this.vy;
-    this.alpha += 0.01;
-    
-		// colision
-    if (
-			this.x < 0 ||
-			this.x > q.width ||
-			this.y < 0 ||
-			this.y > q.height
-		){
-      const newX = q.random(0, q.width);
-      const newY = q.random(0, q.height);
-      this.x = newX;
-      this.y = newY;
-      this.alpha = 0;
-    }
+	// colision
+	if (
+		this.x < 0 ||
+		this.x > q.width ||
+		this.y < 0 ||
+		this.y > q.height
+	){
+	  const newX = q.random(0, q.width);
+	  const newY = q.random(0, q.height);
+	  this.x = newX;
+	  this.y = newY;
+	  this.alpha = 0;
 	}
+}
 
-	render(instance, hueValue) {
-		instance.stroke(hueValue, 100, 100, this.alpha);
-    instance.point(this.x,this.y);
+render(q, hueValue) {
+	q.stroke(hueValue, 100, 100, this.alpha);
+    q.point(this.x,this.y);
   }
 }
 
