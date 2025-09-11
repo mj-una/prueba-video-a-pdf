@@ -190,12 +190,14 @@ a {
 
 #fixedArea video {
 	height: 100px;
+	aspect-ratio: 5/6;
 	position: absolute;
 	top: 0;
 	display: inline-block !important;
 	border: 2.4px solid white;
 	box-shadow: 0 0 12px 7px rgba(255, 255, 255, 0.2);
 	animation: scaleClick 15s ease infinite;
+	background-color: black;
 }
 
 @keyframes scaleClick {
