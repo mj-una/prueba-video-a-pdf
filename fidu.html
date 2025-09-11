@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>fidu</title>
+<style>
+	body {
+		background-color: rgb(40, 41, 46);
+	}
+</style>
+<script src="./libs/q5.min.js"></script>
+<!-- <script src="https://q5js.org/q5.min.js"></script> -->
+</head>
+<body>
+<main></main>
+<script>
+
+const F = 1; // 1.8 2.6
+
+const H = 1240;
+const W = 1754;
+
+const Q = 31 / F;
+const B = 12 / F;
+const N = 36;
+
+const S = 30;
+const P = 10;
+const T = 28;
+
+// eje x
+const fiduX = N * 2 + Q * 4 + B * 2;
+const freeX = W - fiduX - S * 2;
+console.log(`${F} freeX: ${Math.floor(freeX)}`);
+// 1.0 = 1474
+// 1.8 = 1539
+// 2.6 = 1565
+
+// eje y
+const fiduY = N * 2 + B * 2;
+const freeY = W - fiduY - S * 2;
+console.log(`${F} freeY: ${Math.floor(freeY)}`);
+// 1.0 = 1598
+// 1.8 = 1608
+// 2.6 = 1612
+
+const WSM = W - N - Q;
+const WSMM = WSM - Q;
+const WSMMB = WSMM - B;
+
+const HS = H - N;
+const HSS = HS - N;
+const HSM = HS - Q;
+const HSB = HS - B;
+const HSMM = HSM - Q;
+const HAV = HSMM - 1;
+const SM = N + Q;
+const SMM = SM + Q;
+
+const WSMSMM = WSMM - SMM;
+
+// function setup() {
+	createCanvas(W, H);
+	displayMode(MAXED);
+	noStroke();
+
+	background(255);
+	
+	fill(255, 5, 0);
+	fill(0);
+	rect(WSM, HSM, Q, Q);
+	rect(WSMM, HSMM, Q, Q);
+	rect(N, HSM, Q, Q);
+	rect(SM, HSMM, Q, Q);
+	
+	fill(0);
+	let is = true;
+	for (let y = N; y < HAV; y += Q) {
+		if (is) {
+			rect(N, y, Q, Q);
+			rect(WSM, y, Q, Q);
+		}
+		else {
+			rect(SM, y, Q, Q);
+			rect(WSMM, y, Q, Q);
+		}
+		is = !is;
+	}
+
+	rect(SMM, N, WSMSMM, B);
+	rect(SMM, HSB, WSMSMM, B);
+
+	rect(SMM, N, B, HSS);
+	rect(WSMMB, N, B, HSS);
+// }
+
+
+</script>
+</body>
+</html>

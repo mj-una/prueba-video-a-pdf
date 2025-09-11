@@ -1,0 +1,226 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	background: linear-gradient(to bottom, red, green, blue);
+	cursor: move;
+}
+
+address {
+	width: 100%;
+	height: max(14vw, 8rem);
+	position: absolute;
+	top: 0;
+	z-index: 12;
+	display: flex;
+	animation: translateAddress 15s ease infinite;
+}
+
+@keyframes translateAddress {
+	0% { transform: translateY(-75%) }
+	50% { transform: translateY(-5%) }
+	100% { transform: translateY(-75%) }
+}
+
+address img {
+	flex: 1;
+	min-width: 10px;
+	position: relative;
+	top: 10px;
+	z-index: 13;
+	animation: rotateImg 15s ease infinite;
+}
+
+@keyframes rotateImg {
+	0% { transform: scale(0.5) rotate(9deg) }
+	50% { transform: scale(1.1) rotate(-0.7deg) }
+	100% { transform: scale(0.5) rotate(9deg) }
+}
+
+address video {
+	height: 100%;
+	margin-right: 3vw;
+	z-index: 14;
+	display: block !important;
+	border: 2.4px solid white;
+	box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.447);
+}
+
+main {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: translateMain 15s ease infinite;
+}
+
+@keyframes translateMain {
+	0% { transform: translateY(-25%) }
+	50% { transform: translateY(5%) }
+	100% { transform: translateY(-25%) }
+}
+
+main canvas {
+	user-select: none;
+	-webkit-user-select: none;
+	box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2);
+	animation: rotateCanvas 15s linear infinite;
+}
+
+@keyframes rotateCanvas {
+	0% { transform: scale(1.1) rotate(225deg) }
+	50% { transform: scale(1.7) rotate(405deg) }
+	100% { transform: scale(1.1) rotate(585deg) }
+}
+
+main video {
+	display: none !important;
+}
+
+main h1 {
+	position: absolute;
+	top: 35%;
+	z-index: 10;
+	font-size: min(9vw, 10vh);
+	font-weight: normal;
+	text-align: center;
+	color: rgb(255, 255, 255);
+	text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+	animation: translateTitle 15s ease infinite;
+}
+
+@keyframes translateTitle {
+	0% { transform: translateY(-40%) }
+	50% { transform: translateY(-50%) }
+	100% { transform: translateY(-40%) }
+}
+
+main ol {
+	position: absolute;
+	top: 42%;
+	z-index: 9;
+	text-align: center;
+	list-style: none;
+	color: rgb(255, 255, 255);
+}
+
+main ol li {
+	font-weight: bold;
+	text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+a {
+	color: white;
+}
+
+#item1 {
+	animation: translateItem1 15s ease infinite;
+}
+
+@keyframes translateItem1 {
+	0% { transform: translateY(100%) }
+	50% { transform: translateY(-5%) }
+	100% { transform: translateY(100%) }
+}
+
+#item2 {
+	animation: translateItem2 15s ease infinite;
+}
+
+@keyframes translateItem2 {
+	0% { transform: translateY(200%) }
+	50% { transform: translateY(-5%) }
+	100% { transform: translateY(200%) }
+}
+
+#item3 {
+	animation: translateItem3 15s ease infinite;
+}
+
+@keyframes translateItem3 {
+	0% { transform: translateY(300%) }
+	50% { transform: translateY(-5%) }
+	100% { transform: translateY(300%) }
+}
+
+#item4 {
+	animation: translateItem4 15s ease infinite;
+}
+
+@keyframes translateItem4 {
+	0% { transform: translateY(400%) }
+	50% { transform: translateY(-5%) }
+	100% { transform: translateY(400%) }
+}
+
+#item5 {
+	animation: translateItem5 15s ease infinite;
+}
+
+@keyframes translateItem5 {
+	0% { transform: translateY(500%) }
+	50% { transform: translateY(-5%) }
+	100% { transform: translateY(500%) }
+}
+
+#item6 {
+	animation: translateItem6 15s ease infinite;
+}
+
+@keyframes translateItem6 {
+	0% { transform: translateY(600%) }
+	50% { transform: translateY(-5%) }
+	100% { transform: translateY(600%) }
+}
+
+#fixedArea {
+	width: 100%;
+	height: 40vh;
+	height: 40svh;
+	position: fixed;
+	top: 60vh;
+	display: flex;
+	justify-content: center;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+#fixedArea video {
+	height: 100px;
+	position: absolute;
+	top: 0;
+	display: inline-block !important;
+	border: 2.4px solid white;
+	box-shadow: 0 0 12px 7px rgba(255, 255, 255, 0.2);
+	animation: scaleClick 15s ease infinite;
+}
+
+@keyframes scaleClick {
+	0% { transform: scale(1.2) translateY(-2.4vh) }
+	50% { transform: scale(0.6) translateY(4vh) }
+	100% { transform: scale(1.2) translateY(-2.4vh) }
+}
+
+#fixedArea label {
+	padding: 1.2rem 2.2rem;
+	position: absolute;
+	bottom: max(90px, 22%);
+	background-color: rgb(176, 176, 176);
+	user-select: auto;
+	-webkit-user-select: auto;
+	cursor: pointer;
+	border: 1.7px outset black;
+	border-image: none 100% / 1 / 0 stretch;
+	text-shadow: 0 0 10px rgba(255, 255, 255, 0.772);
+	box-shadow: 0 0 12px 6px rgba(255, 255, 255, 0.4);
+	animation: scaleLabel 15s ease infinite;
+}
+
+@keyframes scaleLabel {
+	0% { transform: scale(1) }
+	50% { transform: scale(1.4) }
+	100% { transform: scale(1) }
+}

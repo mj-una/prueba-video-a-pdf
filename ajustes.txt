@@ -2,20 +2,15 @@ frames por segundo:
 1
 2
 3
-4
 5
 6
+8
 10
 12
 15
+20
 24
 30
-?_60
-?_1/2
-?_1/3
-?_1/4
-?_1/6
-?_custom
 
 frames por hoja:
 1 (1x1h)
@@ -26,25 +21,17 @@ frames por hoja:
 8 (4x2v)
 9 (3x3h)
 12 (4x3v)
-?_15 (5x3v)
-?_16 (4x4h)
-?_18 (6x3v)
-?_20 (4x5h)
-?_24 (6x4v)
-?_28 (7x4v)
-?_32 (8x4v)
-?_36 (9x4v)
+15 (5x3v)
+16 (4x4h)
+18 (6x3v)
+20 (4x5h)
 
-escala frame
-?_* separacion horizontal
-?_* separacion vertical
+sangria
+escala
 
-?_sangria horizontal
-?_/ sangria vertical
-
-resolucion:
+resolucion
 150 (baja)          1240x1754px
 300 (normal)        2480x3508px
 600 (alta!!)        4960x7016px
 ?_1200 (muy alta!!) 9921x14031px
-?_2400 (sapucayy!!) 19843x28063px
+?_2400 (sapucaiiii) 19843x28063px

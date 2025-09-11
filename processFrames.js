@@ -33,7 +33,7 @@ const drawCurrentPage = async (doc, buffer, config) => {
 //_______
 const drawMetadataQR = async (buffer, config) => {
   const qr = await getMetadataQR(config);
-  const layoutQR = config.layoutSize[0];
+  const layoutQR = config.layoutArgs[0];
   const x = layoutQR[0];
   const y = layoutQR[1];
   const m = Math.min(layoutQR[2], layoutQR[3]);
@@ -54,7 +54,7 @@ const jumpToTimestamp = async (video, timestamp) => {
 
 //_______
 const processFrames = async (doc, buffer, config, video) => {
-	const { framesPerSecond, framesPerPage, layoutSize } = config;
+	const { framesPerSecond, framesPerPage, layoutArgs } = config;
 	const interval = 1 / framesPerSecond;
 	const totalFrames = Math.floor(video.duration * framesPerSecond);
 	const maxIndex = framesPerPage - 1;
@@ -75,7 +75,7 @@ const processFrames = async (doc, buffer, config, video) => {
 		
 		// q5 hidden canvas
 		const frameIndex = (currentFrame + 1) % framesPerPage;
-		const args = layoutSize[frameIndex]; // { index: [x, y, w, h, tx, ty] }
+		const args = layoutArgs[frameIndex]; // { index: [x, y, w, h, tx, ty] }
     buffer.image(video, args[0], args[1], args[2], args[3]);
     buffer.text(currentFrame, args[4], args[5]);
 		
