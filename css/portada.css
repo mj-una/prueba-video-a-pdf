@@ -190,7 +190,7 @@ a {
 
 #fixedArea video {
 	height: 100px;
-	aspect-ratio: 5/6;
+	aspect-ratio: 6/5;
 	position: absolute;
 	top: 0;
 	display: inline-block !important;
