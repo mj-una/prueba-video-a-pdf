@@ -1,5 +1,5 @@
 
-	import processFrames from "./processFrames.js";
+	import processFrames from "./modulos/procesarFotogramas.js";
 	import getLayoutArgsFactory from "./getLayoutArgs.js";
 	import getFiducialMarkers from "./getFiducialMarkers.js";
 	const { jsPDF } = window.jspdf;

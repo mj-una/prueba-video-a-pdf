@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "times-new-roman-bold";
+  src: url("../estaticos/times-new-roman-bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+html {
+	background-color: #0000ff;
+}
+
+:root {
+	--vpw: 1vw;
+	--vph: 1vh;
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+	width: calc(100 * var(--vpw, 1vw));
+	height: calc(100 * var(--vph, 1vh));
+	overflow: hidden;
+}
+
+.pausar-animaciones * {
+	animation-play-state: paused !important;
+  transition: none !important;
+}

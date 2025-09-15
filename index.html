@@ -5,42 +5,51 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>𝓥𝓲𝓭𝓮𝓸 𝓪 𝓟𝓓𝓕</title>
 	<link rel="icon" type="image/svg+xml" href="./estaticos/blipip.svg">
-	<link rel="stylesheet" href="css/index.css">
-	<link rel="stylesheet" href="css/portada.css">
+	<link rel="stylesheet" href="./estilos/index.css">
+	<link rel="stylesheet" href="./estilos/portada.css">
+	<link rel="stylesheet" href="./estilos/cargando.css">
+	<link rel="stylesheet" href="./estilos/ajustes.css">
 	<script src="https://q5js.org/q5.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
+	
 	<main>
 		<h1>🅥🅘🅓🅔🅞 🅐 🅟🅓🅕</h1>
 		<ol>
-			<li id="item1">𝟙. 𝕤𝕖𝕝𝕖𝕔𝕔𝕚𝕠𝕟𝕒 𝕥𝕦 𝕧𝕚𝕕𝕖𝕠 𝕞𝕡𝟜, 𝕞𝕠𝕧, 𝕠𝕘𝕘</li>
-			<li id="item2">𝟚. 𝕕𝕖𝕤𝕔𝕒𝕣𝕘𝕒 𝕦𝕟 𝕡𝕕𝕗 𝕔𝕠𝕟 𝕝𝕠𝕤 𝕗𝕠𝕥𝕠𝕘𝕣𝕒𝕞𝕒𝕤</li>
-			<li id="item3">𝟛. 𝕚𝕞𝕡𝕣𝕚𝕞𝕖 𝕖𝕝 𝕡𝕕𝕗 𝕖𝕟 𝕓𝕝𝕒𝕟𝕔𝕠 𝕪 𝕟𝕖𝕘𝕣𝕠</li>
-			<li id="item4">𝟜. 𝕡𝕚𝕟𝕥𝕒 𝕔𝕒𝕕𝕒 𝕗𝕠𝕥𝕠𝕘𝕣𝕒𝕞𝕒 𝕒 𝕞𝕒𝕟𝕠</li>
-			<li id="item5">𝟝. 𝕖𝕤𝕔𝕒𝕟𝕖𝕒 𝕝𝕒𝕤 𝕙𝕠𝕛𝕒𝕤 𝕖𝕟 𝕠𝕣𝕕𝕖𝕟</li>
-			<li id="item6">𝟞. 𝕤𝕚𝕘𝕦𝕖 𝕒𝕔𝕒:
-				<a href="https://pdf-a-video.github.io" target="_blank">𝕡𝕕𝕗-𝕒-𝕧𝕚𝕕𝕖𝕠.𝕘𝕚𝕥𝕙𝕦𝕓.𝕚𝕠</a>
+			<li id="item1">1. selecciona tu video mp4, mov, ogg</li>
+			<li id="item2">2. descarga un pdf con los fotogramas</li>
+			<li id="item3">3. imprime el pdf en blanco y negro</li>
+			<li id="item4">4. pinta cada fotograma a mano</li>
+			<li id="item5">5. escanea las hojas en orden</li>
+			<li id="item6">6. sigue aca:
+				<a href="https://pdf-a-video.github.io" target="_blank">pdf-a-video.github.io</a>
 			</li>
 		</ol>
 	</main>
 
-	<div id="fixedArea">
-		<video autoplay loop muted playsinline height="100px">
+	<div id="zona-fijada-abajo">
+		<video
+			autoplay
+			loop
+			muted
+			playsinline
+			height="100px">
 			<source src="./estaticos/anios-veinte.mp4" type="video/mp4">
 		</video>
+
 		<label>
 			SELECCIONAR ARCHIVO
 			<input
-			id="inputFile"
-			type="file"
-			accept="video/mp4,video/webm,video/ogg,video/quicktime"
-			required
-			hidden
+				id="input-desde-local"
+				type="file"
+				accept="video/mp4,video/webm,video/ogg,video/quicktime"
+				required
+				hidden
 			>
 		</label>
 	</div>
-
+	
 	<address>
 		<img src="./estaticos/para-pv1.png" alt="una interfaz para pv1">
 		<video autoplay loop muted playsinline>
@@ -49,6 +58,41 @@
 		</video>
 	</address>
 
-	<script src="./modulos/baileDelLaberinto.js" type="module"></script>
+	<!-- oculto -->
+	<video
+		id="video-desde-local" 
+		muted 
+		playsinline 
+		preload="auto" 
+		style="display: none">
+	</video>
+	
+	<!-- oculto -->
+	<div id="contenedor-cargando-archivo">
+		<video
+			class="video-fondo"
+			muted
+			playsinline 
+			preload="none">
+		</video>
+		<video
+			class="video-frente"
+			playsinline 
+			preload="none">
+		</video>
+	</div>
+
+	<!-- oculto -->
+	<div id="contenedor-ajustes-pdf">
+		<video
+			playsinline
+			preload="none"
+			style="display: none">
+		</video>
+		<audio preload="none"></audio>
+	</div>
+
+	<!-- javascript -->
+	<script type="module" src="./modulos/index.js"></script>
 </body>
 </html>

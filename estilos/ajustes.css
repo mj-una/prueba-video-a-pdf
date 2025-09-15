@@ -1,0 +1,14 @@
+#contenedor-ajustes-pdf {
+	width: 100vw;
+	height: 100vh;
+	width: calc(100 * var(--vpw, 1vw));
+	height: calc(100 * var(--vph, 1vh));
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 90;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
+}

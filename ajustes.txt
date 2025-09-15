@@ -7,7 +7,7 @@ frames por segundo:
 8
 10
 12
-15
+15 DEFAULT
 20
 24
 30
@@ -19,19 +19,19 @@ frames por hoja:
 4 (2x2h)
 6 (3x2v)
 8 (4x2v)
-9 (3x3h)
+9 (3x3h) DEFAULT
 12 (4x3v)
 15 (5x3v)
 16 (4x4h)
 18 (6x3v)
 20 (4x5h)
 
-sangria
 escala
+sangria
 
 resolucion
 150 (baja)          1240x1754px
-300 (normal)        2480x3508px
+300 (normal)        2480x3508px DEFAULT
 600 (alta!!)        4960x7016px
 ?_1200 (muy alta!!) 9921x14031px
 ?_2400 (sapucaiiii) 19843x28063px

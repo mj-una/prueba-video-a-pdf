@@ -1,0 +1,35 @@
+#contenedor-cargando-archivo {
+	width: 100vw;
+	height: 100vh;
+	width: calc(100 * var(--vpw, 1vw));
+	height: calc(100 * var(--vph, 1vh));
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 90;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
+	cursor: wait;
+}
+
+#contenedor-cargando-archivo video {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+  left: 0;
+}
+
+#contenedor-cargando-archivo .video-fondo {
+	z-index: 92;
+  object-fit: fill;
+	transform: scale(1.1);
+	filter: brightness(0.3);
+}
+
+#contenedor-cargando-archivo .video-frente {
+	z-index: 95;
+	object-fit: contain;
+}
