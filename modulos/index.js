@@ -79,7 +79,7 @@ inputLocal.addEventListener("change", async () => {
 	});
 	
 	// promesas cargando
-	const esperarMinimo = new Promise(resolver => setTimeout(resolver, 9));
+	const esperarMinimo = new Promise(resolver => setTimeout(resolver, 9000));
 	const terminarDeCargar = new Promise(resolver => {
 		videoLocal.addEventListener("loadeddata", resolver, { once: true });
 	});
